@@ -46,3 +46,18 @@ The final WordPress.org slug is subject to directory approval. Verify current pa
 The earlier [SVN deploy run 45687749046](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45687749046) failed on the old commit because `SVN_USERNAME` was not configured. Do not retry or publish before directory approval and final slug assignment. Once approved, configure the SVN credentials securely as repository secrets and deploy from the approved source, not the old commit. No WordPress.org approval, listing or SVN publication has been verified.
 
 The initial upload is the inner installable ZIP, not the Actions artifact wrapper. Keep the existing assets separate for approved SVN distribution. The official [plugin guidelines](https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/) and [developer FAQ](https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/) remain the submission authority.
+
+## Verified paired compatibility — 2026-11-26
+
+[Pro CI run 45705094936](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce/actions/runs/45705094936) passed on Pro head `55e05ab0482e3f25565e0fd3b10268c6514c76dc` (PR merge test) with Free `93832d7f4d38450b71a78d9a0b12082820d9f083`. Installed runtime versions were checked from logs:
+
+| WordPress | WooCommerce | PHP | Paired integration |
+|---|---|---|---|
+| 7.0.9 | 11.2.2 | 8.3.36 | Pass |
+| 7.0.9 | 11.3.1 | 8.3.36 | Pass |
+| 7.1.5 | 11.2.2 | 8.3.36 | Pass |
+| 7.1.5 | 11.3.1 | 8.3.36 | Pass |
+| 7.1.5 | 11.3.1 | 8.2.35 | Pass |
+| 7.1.5 | 11.3.1 | 8.4.27 | Pass |
+
+PHP lint/contracts and both package builds also passed. Run 45704087895 previously detected an incorrect PHP fallback in the moving-latest tests; corrected blueprint pinning and retained runtime assertions. Update WC tested up to to 11.3; minimums and version remain unchanged. Evidence covers synthetic paired integration in Playground (SQLite), not full checkout E2E, every possible version combination or vendor QIT. Fresh CI on the header-updated packages is required. Pro artifact publication remains blocked while the repository is public.
