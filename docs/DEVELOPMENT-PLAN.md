@@ -1,8 +1,8 @@
 # Development plan
 
-**Product:** Checkout Impact Regression for WooCommerce (by WPEssential), plus the paid Checkout Impact Regression Pro add-on  
-**Repository:** `Vertex-Systems-Network/checkout-impact-regression-for-woocommerce`  
-**WordPress.org slug:** `checkout-impact-regression-for-woocommerce` · **Plugin URI:** https://wpessential.org/plugins/checkout-impact-regression-for-woocommerce  
+**Product:** WPEssential Checkout Impact Regression for WooCommerce (by WPEssential), plus the paid Checkout Impact Regression Pro add-on  
+**Repository:** `Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce`  
+**WordPress.org slug:** `wpessential-checkout-impact-regression-for-woocommerce` · **Plugin URI:** https://wpessential.org/plugins/wpessential-checkout-impact-regression-for-woocommerce  
 **Stage:** v1.0.0 release candidate (Phase 7 v1 scope done; Phase 8 submission prepared, waiting on owner actions)  
 **Plan last updated:** 2026-11-12 (evening: Pro split into its own repository, MySQL + accessibility evidence)
 
@@ -291,7 +291,7 @@ Dates remain TBD until the team estimates the work. Record actual start/end date
 - Privacy: exporter/eraser, privacy-policy suggestion, preserve-by-default uninstall with opt-in erase.
 - HPOS and Cart/Checkout blocks compatibility declared (the plugin never touches orders).
 - Extension points for add-ons: `wpecir_loaded`, `wpecir_change_event_recorded`, `wpecir_manual_report_saved`, `wpecir_pro_active`, `wpecir_tracked_option_names`; JS filters `wpecir.adminTabs`, `wpecir.reportActions`.
-- **Pro add-on** (separate repository `checkout-impact-regression-pro-for-woocommerce`): email digest alerts for recorded changes (15-minute batching, up to 5 recipients, no setting values in mail) and CSV/JSON report export with spreadsheet-formula neutralisation.
+- **Pro add-on** (separate repository `wpessential-checkout-impact-regression-pro-for-woocommerce`): email digest alerts for recorded changes (15-minute batching, up to 5 recipients, no setting values in mail) and CSV/JSON report export with spreadsheet-formula neutralisation.
 
 **Evidence layers (2026-11-12):** contract tests (18 scripts, all pass); local runtime on WordPress 7.1.4 / WooCommerce 11.2.2 / PHP 8.3 / SQLite: browser end-to-end flow, package install on a fresh site, activation, schema install and v1→v2 upgrade, REST authorization (anonymous 403, subscriber 403), uninstall preserve and erase, privacy export/erase, Pro alerts and export. CI adds PHP 8.2/8.3/8.4 lint+contracts, package build and the official WordPress.org Plugin Check action. Details: [Phase 7 task evidence](validation/PHASE-7-TASK-EVIDENCE.md).
 
@@ -385,11 +385,11 @@ Counting: BUILD-001, IMPL-001–004, 007, 008, 010, 011, IMPL-012…025 (14), IM
 - **D-018 (2026-11-12):** Progress is reported as v1-scope completion plus deferred count; Phase 6 NO-GO is shown explicitly. Reason: the old task-count formula let test-only tasks raise the bar while 0 of 11 core tasks were complete.
 - **D-019 (2026-11-12):** v1.0 is the manual comparison product. Automatic observation is v1.x, gated by ENV-001 and Phase 6.
 - **D-020 (2026-11-12):** AI contributors work on branches and open pull requests; the owner merges. "..." or "?" does not authorise external or irreversible actions.
-- **D-022 (2026-11-12):** Plugin names, slugs, main files and text domains equal the repository slugs: `checkout-impact-regression-for-woocommerce` and `checkout-impact-regression-pro-for-woocommerce`.
+- **D-022 (2026-11-12):** Plugin names, slugs, main files and text domains equal the repository slugs: `wpessential-checkout-impact-regression-for-woocommerce` and `wpessential-checkout-impact-regression-pro-for-woocommerce`.
 - **D-023 (2026-11-12):** Pro lives in its own repository. The free plugin contains no Pro code; Pro never works without free. The two stay in sync through Pro's `tests/free-api-contract.php` and a shared Playground integration run. The public free repository runs both on pushes to `main`, on pull requests from its own branches, nightly and on demand (same-named Pro branch if it exists or the `pro_ref` input, pinned to the resolved commit) using `PRO_REPO_TOKEN`; this costs no paid runner minutes. Fork pull requests get no secret and skip the Pro jobs, so they do not prove Pro compatibility. The private Pro repository's CI runs automatically only while it is public; once private it runs only by hand (`workflow_dispatch`); a skipped automatic run there is not a pass, so a Pro pull request is verified through the free repository's CI (same-named branch or `pro_ref`). Pro ZIPs can be built locally with `bin/build.sh`. Paired ZIPs are produced only from the Pro repository (D-025).
 - **D-024 (2026-11-12):** `readme.txt` is generated from `wordpress-org/readme.md` with the WPEssential readme system (`tools/readme-to-txt.php`); CI fails when they differ.
 - **D-025 (2026-11-12):** Pro packages are downloadable only by the owner/admins. GitHub lets anyone with read access to a repository download its Actions artifacts, so the Pro repository must be private and only the owner/admins may have access to it (no read-only collaborators, outside collaborators or broad team grants); its CI artifacts expire after 7 days and are uploaded only while it is private. The public free repository never builds, uploads or publishes Pro files; it tests Pro inside the job with a read-only `PRO_REPO_TOKEN` secret.
-- **D-021 (2026-11-12, Pro slug superseded by D-022):** Free plugin slug `checkout-impact-regression-for-woocommerce` (name "Checkout Impact Regression for WooCommerce", author WPEssential, Plugin URI `https://wpessential.org/plugins/<slug>`). Pro is a separate plugin `checkout-impact-regression-pro` sold on WooCommerce.com: email alerts and report export. No feature in the free plugin is locked or time-limited.
+- **D-021 (2026-11-12, Pro slug superseded by D-022):** Free plugin slug `wpessential-checkout-impact-regression-for-woocommerce` (name "WPEssential Checkout Impact Regression for WooCommerce", author WPEssential, Plugin URI `https://wpessential.org/plugins/<slug>`). Pro is a separate plugin `checkout-impact-regression-pro` sold on WooCommerce.com: email alerts and report export. No feature in the free plugin is locked or time-limited.
 
 ### Open questions
 
@@ -403,3 +403,7 @@ Counting: BUILD-001, IMPL-001–004, 007, 008, 010, 011, IMPL-012…025 (14), IM
 - Update this plan and README in the same pull request as the change.
 - Keep historical evidence; add dated corrections instead of rewriting results.
 - Dated progress logs that used to live here were moved to [Phase 7 task evidence](validation/PHASE-7-TASK-EVIDENCE.md) on 2026-11-12.
+
+### Submission identity follow-up (2026-11-26)
+
+D-022 follows the current repository slugs, and both Plugin URI headers use the shared wiki (https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki). REL-001 requires fresh package verification; REL-002 and REL-003 remain partial. D-025 remains in force: Pro is currently public and no public Pro ZIP is permitted. Historical runtime evidence is not validation of the renamed ZIP. V1 scope accounting is unchanged.

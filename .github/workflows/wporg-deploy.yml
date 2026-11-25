@@ -33,6 +33,6 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: checkout-impact-regression-for-woocommerce
-          BUILD_DIR: build/checkout-impact-regression-for-woocommerce
+          SLUG: wpessential-checkout-impact-regression-for-woocommerce
+          BUILD_DIR: build/wpessential-checkout-impact-regression-for-woocommerce
           ASSETS_DIR: build/wporg-assets

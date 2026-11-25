@@ -1,4 +1,4 @@
-# Checkout Impact Regression for WooCommerce
+# WPEssential Checkout Impact Regression for WooCommerce
 
 **Contributors:** wpessential\
 **Tags:** woocommerce, checkout, regression testing, shipping, payment gateways\
@@ -16,7 +16,7 @@ See what changed at checkout after a plugin update or settings change. Compare s
 
 A plugin update or a small change to a shipping zone or payment gateway can quietly change what customers see at checkout: a shipping method disappears, a rate changes, a coupon stops applying or a payment method is no longer offered. Store owners usually find out from a customer.
 
-**Checkout Impact Regression for WooCommerce** gives you a simple before-and-after check for the checkout journeys that matter most to your store.
+**WPEssential Checkout Impact Regression for WooCommerce** gives you a simple before-and-after check for the checkout journeys that matter most to your store.
 
 ### How it works
 
@@ -51,11 +51,11 @@ It never places orders, charges payments, sends emails to customers or opens che
 
 ### Pro add-on
 
-Checkout Impact Regression Pro for WooCommerce (sold separately on the WooCommerce Marketplace) adds email alerts when a checkout-related change is recorded and CSV/JSON export of reports. Pro is a separate plugin that needs this free plugin to be installed and active. Everything listed above is free and fully working without Pro.
+WPEssential Checkout Impact Regression Pro for WooCommerce (a separate paid add-on) adds email alerts when a checkout-related change is recorded and CSV/JSON export of reports. Pro is a separate plugin that needs this free plugin to be installed and active. Everything listed above is free and fully working without Pro.
 
 ### Documentation
 
-Open **WooCommerce → Checkout Impact → Docs** in your dashboard, or use the **Documentation** link on the Plugins screen. More information: [wpessential.org/plugins/checkout-impact-regression-for-woocommerce](https://wpessential.org/plugins/checkout-impact-regression-for-woocommerce)
+Open **WooCommerce → Checkout Impact → Docs** in your dashboard, or use the **Documentation** link on the Plugins screen. More information: [Plugin documentation](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki)
 
 ## External services
 

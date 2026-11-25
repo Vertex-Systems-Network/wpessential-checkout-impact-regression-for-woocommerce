@@ -28,7 +28,7 @@ function register_activation_hook( $file, $callback ) { $GLOBALS['wpecir_depende
 function register_deactivation_hook( $file, $callback ) { $GLOBALS['wpecir_dependency_activation_hooks'][] = array( 'deactivation', $file, $callback ); }
 function add_management_page( ...$args ) { $GLOBALS['wpecir_dependency_menus'][] = array_merge( array( 'tools.php' ), $args ); }
 function add_submenu_page( ...$args ) { $GLOBALS['wpecir_dependency_menus'][] = $args; }
-function plugin_basename( $file ) { return 'checkout-impact-regression-for-woocommerce/' . basename( $file ); }
+function plugin_basename( $file ) { return 'wpessential-checkout-impact-regression-for-woocommerce/' . basename( $file ); }
 function wp_set_script_translations( ...$args ) { return true; }
 function admin_url( $path = '' ) { return 'https://example.test/wp-admin/' . $path; }
 function esc_url( $url ) { return $url; }
@@ -49,7 +49,7 @@ function dependency_check( $condition, $message ) {
 }
 
 // Force the plugin bootstrap's autoloader path to be absent.
-require dirname( __DIR__, 2 ) . '/checkout-impact-regression-for-woocommerce.php';
+require dirname( __DIR__, 2 ) . '/wpessential-checkout-impact-regression-for-woocommerce.php';
 dependency_check( isset( $GLOBALS['wpecir_dependency_hooks']['admin_notices'] ), 'missing Composer autoloader registers a recovery notice' );
 dependency_check( empty( $GLOBALS['wpecir_dependency_activation_hooks'] ), 'missing autoloader prevents activation/deactivation callbacks from being registered' );
 dependency_check( empty( $GLOBALS['wpecir_dependency_hooks']['plugins_loaded'] ), 'missing autoloader prevents plugin classes from being invoked' );
@@ -102,7 +102,7 @@ if ( ! class_exists( 'WooCommerce', false ) ) {
 $admin->register_menu();
 $menu = end( $GLOBALS['wpecir_dependency_menus'] );
 dependency_check( 'woocommerce' === $menu[0] && 'manage_woocommerce' === $menu[3], 'screen lives under the WooCommerce menu with the manager capability when WooCommerce is active' );
-$links = $admin->row_meta( array(), 'checkout-impact-regression-for-woocommerce/checkout-impact-regression-for-woocommerce.php' );
+$links = $admin->row_meta( array(), 'wpessential-checkout-impact-regression-for-woocommerce/wpessential-checkout-impact-regression-for-woocommerce.php' );
 dependency_check( 2 === count( $links ) && false !== strpos( $links[0], '#docs' ), 'plugin row links to the in-plugin documentation' );
 dependency_check( false !== strpos( $links[1], '/wiki' ) && false !== strpos( $links[1], 'noopener' ), 'plugin row links to the Wiki in a new tab' );
 dependency_check( array() === $admin->row_meta( array(), 'other/other.php' ), 'row meta is not added to other plugins' );

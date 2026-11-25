@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Builds dist/checkout-impact-regression-for-woocommerce-<version>.zip (WordPress.org).
+# Builds dist/wpessential-checkout-impact-regression-for-woocommerce-<version>.zip (WordPress.org).
 # With PRO_DIR=<path to a local checkout of the private Pro repository> it also
 # builds the Pro ZIP into dist/ (local use only: public CI never builds or uploads Pro).
 # Only allowlisted runtime files are packaged; tests, docs and AI files never ship.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SLUG=checkout-impact-regression-for-woocommerce
+SLUG=wpessential-checkout-impact-regression-for-woocommerce
 version() { grep -m1 -E '^\s*\*\s*Version:' "$1" | sed -E 's/.*Version:\s*//' | tr -d '[:space:]'; }
 VERSION=$(version "$SLUG.php")
 CONST=$(grep -oE "WPECIR_VERSION', '[^']+'" "$SLUG.php" | grep -oE "[0-9][^']*")
@@ -19,7 +19,7 @@ composer install --no-interaction --no-dev --optimize-autoloader --quiet
 
 rm -rf build/$SLUG && mkdir -p build/$SLUG dist
 # Start clean, including Pro packages from an earlier PRO_DIR build.
-rm -f dist/$SLUG-*.zip dist/$SLUG-*.zip.sha256 dist/checkout-impact-regression-pro-for-woocommerce-*.zip dist/checkout-impact-regression-pro-for-woocommerce-*.zip.sha256
+rm -f dist/$SLUG-*.zip dist/$SLUG-*.zip.sha256 dist/wpessential-checkout-impact-regression-pro-for-woocommerce-*.zip dist/wpessential-checkout-impact-regression-pro-for-woocommerce-*.zip.sha256
 cp -R "$SLUG.php" uninstall.php readme.txt LICENSE composer.json assets includes vendor build/$SLUG/
 find build -name '.DS_Store' -delete
 
@@ -34,6 +34,6 @@ if unzip -Z1 dist/$SLUG-$VERSION.zip | grep -qE '/(tests|docs|tools|\.github)/|A
 if [ -n "${PRO_DIR:-}" ]; then
 	PRO_DIR=$(realpath "$PRO_DIR")
 	FREE_DIR="$PWD" "$PRO_DIR/bin/build.sh" --pro-only
-	cp "$PRO_DIR"/dist/checkout-impact-regression-pro-for-woocommerce-*.zip* dist/
+	cp "$PRO_DIR"/dist/wpessential-checkout-impact-regression-pro-for-woocommerce-*.zip* dist/
 fi
 ls -lh dist
