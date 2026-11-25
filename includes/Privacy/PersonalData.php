@@ -36,8 +36,8 @@ final class PersonalData {
 			return;
 		}
 
-		$content = '<p>' . esc_html__( 'Checkout Impact Regression for WooCommerce stores test checkout scenarios, approved baselines and comparison reports created by store administrators. These records contain the user ID of the administrator who created them. The plugin does not store customer or order data and does not send data to external services. Comparison reports are deleted automatically after the configured retention period.', 'checkout-impact-regression-for-woocommerce' ) . '</p>';
-		wp_add_privacy_policy_content( __( 'Checkout Impact Regression for WooCommerce', 'checkout-impact-regression-for-woocommerce' ), wp_kses_post( $content ) );
+		$content = '<p>' . esc_html__( 'WPEssential Checkout Impact Regression for WooCommerce stores test checkout scenarios, approved baselines and comparison reports created by store administrators. These records contain the user ID of the administrator who created them. The plugin does not store customer or order data and does not send data to external services. Comparison reports are deleted automatically after the configured retention period.', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</p>';
+		wp_add_privacy_policy_content( __( 'WPEssential Checkout Impact Regression for WooCommerce', 'wpessential-checkout-impact-regression-for-woocommerce' ), wp_kses_post( $content ) );
 	}
 
 	/**
@@ -48,7 +48,7 @@ final class PersonalData {
 	 */
 	public static function register_exporter( $exporters ) {
 		$exporters['wpecir-record-authorship'] = array(
-			'exporter_friendly_name' => __( 'WPEssential Checkout Impact Regression', 'checkout-impact-regression-for-woocommerce' ),
+			'exporter_friendly_name' => __( 'WPEssential Checkout Impact Regression', 'wpessential-checkout-impact-regression-for-woocommerce' ),
 			'callback'               => array( __CLASS__, 'export_user_data' ),
 		);
 
@@ -63,7 +63,7 @@ final class PersonalData {
 	 */
 	public static function register_eraser( $erasers ) {
 		$erasers['wpecir-record-authorship'] = array(
-			'eraser_friendly_name' => __( 'WPEssential Checkout Impact Regression', 'checkout-impact-regression-for-woocommerce' ),
+			'eraser_friendly_name' => __( 'WPEssential Checkout Impact Regression', 'wpessential-checkout-impact-regression-for-woocommerce' ),
 			'callback'            => array( __CLASS__, 'erase_user_data' ),
 		);
 
@@ -116,12 +116,12 @@ final class PersonalData {
 		foreach ( $rows as $row ) {
 			$data[] = array(
 				'group_id'    => 'checkout-impact-records',
-				'group_label' => __( 'Checkout Impact record authorship', 'checkout-impact-regression-for-woocommerce' ),
+				'group_label' => __( 'Checkout Impact record authorship', 'wpessential-checkout-impact-regression-for-woocommerce' ),
 				'item_id'     => sanitize_key( $row['record_type'] ) . '-' . absint( $row['record_id'] ),
 				'data'        => array(
-					array( 'name' => __( 'Record type', 'checkout-impact-regression-for-woocommerce' ), 'value' => sanitize_text_field( $row['record_type'] ) ),
-					array( 'name' => __( 'Version or revision', 'checkout-impact-regression-for-woocommerce' ), 'value' => absint( $row['record_version'] ) ),
-					array( 'name' => __( 'Recorded at (UTC)', 'checkout-impact-regression-for-woocommerce' ), 'value' => sanitize_text_field( $row['record_date'] ) ),
+					array( 'name' => __( 'Record type', 'wpessential-checkout-impact-regression-for-woocommerce' ), 'value' => sanitize_text_field( $row['record_type'] ) ),
+					array( 'name' => __( 'Version or revision', 'wpessential-checkout-impact-regression-for-woocommerce' ), 'value' => absint( $row['record_version'] ) ),
+					array( 'name' => __( 'Recorded at (UTC)', 'wpessential-checkout-impact-regression-for-woocommerce' ), 'value' => sanitize_text_field( $row['record_date'] ) ),
 				),
 			);
 		}
@@ -164,7 +164,7 @@ final class PersonalData {
 		return array(
 			'items_removed'  => false,
 			'items_retained' => true,
-			'messages'       => array( __( 'Author and approver identifiers were anonymized; scenario and baseline history was retained.', 'checkout-impact-regression-for-woocommerce' ) ),
+			'messages'       => array( __( 'Author and approver identifiers were anonymized; scenario and baseline history was retained.', 'wpessential-checkout-impact-regression-for-woocommerce' ) ),
 			'done'           => true,
 		);
 	}

@@ -76,7 +76,7 @@ final class Schema {
 		}
 
 		if ( ! $activation && ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
-			return new \WP_Error( 'wpecir_schema_forbidden', __( 'Schema upgrade requires an authorized store administrator.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_schema_forbidden', __( 'Schema upgrade requires an authorized store administrator.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -96,7 +96,7 @@ final class Schema {
 			$found = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) );
 
 			if ( $table !== $found ) {
-				return new \WP_Error( 'wpecir_schema_incomplete', __( 'The plugin storage schema could not be verified.', 'checkout-impact-regression-for-woocommerce' ) );
+				return new \WP_Error( 'wpecir_schema_incomplete', __( 'The plugin storage schema could not be verified.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 			}
 		}
 

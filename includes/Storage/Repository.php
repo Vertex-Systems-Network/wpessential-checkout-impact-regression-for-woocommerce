@@ -144,12 +144,12 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to manage checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to manage checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$title = sanitize_text_field( $title );
 		if ( '' === $title || strlen( $title ) > 191 || is_email( $title ) ) {
-			return new \WP_Error( 'wpecir_invalid_title', __( 'Scenario title is required and must be 191 characters or fewer.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_title', __( 'Scenario title is required and must be 191 characters or fewer.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$input_json       = $this->encode_safe_payload( $input, 'scenario input' );
@@ -177,7 +177,7 @@ final class Repository {
 		);
 
 		if ( false === $ok ) {
-			return new \WP_Error( 'wpecir_scenario_create_failed', __( 'The scenario could not be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_scenario_create_failed', __( 'The scenario could not be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$scenario_id = (int) $wpdb->insert_id;
@@ -203,12 +203,12 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to manage checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to manage checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$scenario = $wpdb->get_row( $wpdb->prepare( 'SELECT id FROM %i WHERE id = %d', $this->table( 'scenarios' ), absint( $scenario_id ) ) );
 		if ( ! $scenario ) {
-			return new \WP_Error( 'wpecir_scenario_not_found', __( 'The requested scenario does not exist.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_scenario_not_found', __( 'The requested scenario does not exist.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$input_json       = $this->encode_safe_payload( $input, 'scenario input' );
@@ -267,7 +267,7 @@ final class Repository {
 		);
 
 		if ( false === $ok ) {
-			return new \WP_Error( 'wpecir_version_create_failed', __( 'The scenario version could not be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_version_create_failed', __( 'The scenario version could not be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		return (int) $wpdb->insert_id;
@@ -283,12 +283,12 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %i WHERE id = %d', $this->table( 'scenarios' ), absint( $scenario_id ) ), ARRAY_A );
 		if ( ! $row ) {
-			return new \WP_Error( 'wpecir_scenario_not_found', __( 'The requested scenario does not exist.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_scenario_not_found', __( 'The requested scenario does not exist.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$version = $wpdb->get_row(
@@ -314,7 +314,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$page     = max( 1, absint( $page ) );
@@ -342,7 +342,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$rows = $wpdb->get_results(
@@ -380,7 +380,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to approve a baseline.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to approve a baseline.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$version = $wpdb->get_row(
@@ -391,7 +391,7 @@ final class Repository {
 			)
 		);
 		if ( ! $version ) {
-			return new \WP_Error( 'wpecir_version_not_found', __( 'A baseline must reference a version of the selected scenario.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_version_not_found', __( 'A baseline must reference a version of the selected scenario.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$observation_json = $this->encode_safe_payload( $observation, 'baseline observation' );
@@ -401,7 +401,7 @@ final class Repository {
 
 		$context = sanitize_text_field( $context );
 		if ( ! preg_match( '/^[a-f0-9]{64}$/', $context ) ) {
-			return new \WP_Error( 'wpecir_invalid_context', __( 'A SHA-256 context fingerprint is required.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_context', __( 'A SHA-256 context fingerprint is required.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$table    = $this->table( 'baselines' );
@@ -424,7 +424,7 @@ final class Repository {
 		);
 
 		if ( false === $ok ) {
-			return new \WP_Error( 'wpecir_baseline_create_failed', __( 'The approved baseline could not be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_baseline_create_failed', __( 'The approved baseline could not be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		return array(
@@ -447,7 +447,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view baselines.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view baselines.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$rows = $wpdb->get_results(
@@ -475,7 +475,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view baselines.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view baselines.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$row = $wpdb->get_row(
@@ -489,7 +489,7 @@ final class Repository {
 		);
 
 		if ( ! $row ) {
-			return new \WP_Error( 'wpecir_baseline_not_found', __( 'The approved baseline does not exist for this scenario.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_baseline_not_found', __( 'The approved baseline does not exist for this scenario.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$row['observation'] = json_decode( $row['observation_json'], true );
@@ -514,14 +514,14 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to save comparison reports.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to save comparison reports.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$scenario_id = absint( $scenario_id );
 		$version_id  = absint( $version_id );
 		$context     = sanitize_text_field( (string) $context );
 		if ( $scenario_id < 1 || $version_id < 1 || ! preg_match( '/^[a-f0-9]{64}$/', $context ) ) {
-			return new \WP_Error( 'wpecir_invalid_comparison_context', __( 'A valid saved scenario version is required.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_comparison_context', __( 'A valid saved scenario version is required.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 		if ( null !== $baseline_id ) {
 			$baseline_id = absint( $baseline_id );
@@ -536,7 +536,7 @@ final class Repository {
 				)
 			);
 			if ( $baseline_id < 1 || (int) $baseline !== $baseline_id ) {
-				return new \WP_Error( 'wpecir_baseline_context_mismatch', __( 'The approved baseline does not match the selected scenario version.', 'checkout-impact-regression-for-woocommerce' ) );
+				return new \WP_Error( 'wpecir_baseline_context_mismatch', __( 'The approved baseline does not match the selected scenario version.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 			}
 		}
 
@@ -549,33 +549,33 @@ final class Repository {
 			)
 		);
 		if ( ! $version ) {
-			return new \WP_Error( 'wpecir_comparison_version_not_found', __( 'The report context does not match a saved version of this scenario.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_comparison_version_not_found', __( 'The report context does not match a saved version of this scenario.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$allowed_fields = array( 'shipping.method', 'shipping.cost', 'coupon.code', 'coupon.discount', 'payment.methods' );
 		foreach ( array( $before, $after ) as $observations ) {
 			if ( ! is_array( $observations ) || count( $observations ) > count( $allowed_fields ) ) {
-				return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Only the supported manual checkout fields may be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+				return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Only the supported manual checkout fields may be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 			}
 			foreach ( $observations as $field => $observation ) {
 				if ( ! is_string( $field ) || ! in_array( $field, $allowed_fields, true ) || ! is_array( $observation ) || empty( $observation['state'] ) || ! in_array( $observation['state'], array( 'observed', 'missing', 'not_observed', 'unsupported', 'collection_error' ), true ) ) {
-					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'The manual observations contain an unsupported field or state.', 'checkout-impact-regression-for-woocommerce' ) );
+					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'The manual observations contain an unsupported field or state.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 				}
 				if ( 'observed' === $observation['state'] && ! array_key_exists( 'value', $observation ) ) {
-					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Every observed value must include its normalized value.', 'checkout-impact-regression-for-woocommerce' ) );
+					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Every observed value must include its normalized value.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 				}
 				if ( 'observed' !== $observation['state'] && array_key_exists( 'value', $observation ) ) {
-					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Unobserved fields cannot include a value.', 'checkout-impact-regression-for-woocommerce' ) );
+					return new \WP_Error( 'wpecir_invalid_comparison_observations', __( 'Unobserved fields cannot include a value.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 				}
 			}
 		}
 		if ( ! is_array( $changes ) || count( $changes ) > count( $allowed_fields ) ) {
-			return new \WP_Error( 'wpecir_invalid_comparison_findings', __( 'The comparison output is invalid.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_comparison_findings', __( 'The comparison output is invalid.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 		$allowed_changes = array( 'shipping_method', 'shipping_cost', 'coupon_code', 'coupon_discount', 'payment_methods' );
 		foreach ( $changes as $field => $change ) {
 			if ( ! is_string( $field ) || ! in_array( $field, $allowed_changes, true ) || ! is_array( $change ) || empty( $change['state'] ) || ! in_array( $change['state'], array( 'changed', 'missing', 'added', 'unchanged', 'not_comparable' ), true ) ) {
-				return new \WP_Error( 'wpecir_invalid_comparison_findings', __( 'The comparison output contains an unsupported field or state.', 'checkout-impact-regression-for-woocommerce' ) );
+				return new \WP_Error( 'wpecir_invalid_comparison_findings', __( 'The comparison output contains an unsupported field or state.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 			}
 		}
 
@@ -583,7 +583,7 @@ final class Repository {
 		$after_json  = $this->encode_safe_payload( $after, 'after observations' );
 		$changes_json= $this->encode_safe_payload( $changes, 'comparison findings' );
 		if ( is_wp_error( $before_json ) || is_wp_error( $after_json ) || is_wp_error( $changes_json ) ) {
-			return new \WP_Error( 'wpecir_sensitive_comparison', __( 'Sensitive or invalid data cannot be saved in a comparison report.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_sensitive_comparison', __( 'Sensitive or invalid data cannot be saved in a comparison report.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$now       = current_time( 'mysql', true );
@@ -607,7 +607,7 @@ final class Repository {
 			array( '%d', '%d', null, null, '%s', '%s', '%s', '%s', '%s', '%d', '%s' )
 		);
 		if ( false === $inserted || absint( $wpdb->insert_id ) < 1 ) {
-			return new \WP_Error( 'wpecir_comparison_save_failed', __( 'The comparison report could not be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_comparison_save_failed', __( 'The comparison report could not be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 		$run_id = absint( $wpdb->insert_id );
 
@@ -627,7 +627,7 @@ final class Repository {
 				);
 				if ( false === $saved ) {
 					$this->delete_manual_comparison_rows( $run_id );
-					return new \WP_Error( 'wpecir_comparison_observation_save_failed', __( 'The comparison report could not save all observations; partial rows were cleaned up.', 'checkout-impact-regression-for-woocommerce' ) );
+					return new \WP_Error( 'wpecir_comparison_observation_save_failed', __( 'The comparison report could not save all observations; partial rows were cleaned up.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 				}
 			}
 		}
@@ -658,7 +658,7 @@ final class Repository {
 			);
 			if ( false === $saved ) {
 				$this->delete_manual_comparison_rows( $run_id );
-				return new \WP_Error( 'wpecir_comparison_finding_save_failed', __( 'The comparison report could not save all findings; partial rows were cleaned up.', 'checkout-impact-regression-for-woocommerce' ) );
+				return new \WP_Error( 'wpecir_comparison_finding_save_failed', __( 'The comparison report could not save all findings; partial rows were cleaned up.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 			}
 		}
 
@@ -690,7 +690,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view comparison reports.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view comparison reports.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$scenario_id = absint( $scenario_id );
@@ -807,7 +807,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to delete checkout scenarios.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to delete checkout scenarios.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$scenario_id = absint( $scenario_id );
@@ -822,7 +822,7 @@ final class Repository {
 		$deleted = $wpdb->delete( $this->table( 'scenarios' ), array( 'id' => $scenario_id ), array( '%d' ) );
 
 		if ( false === $deleted ) {
-			return new \WP_Error( 'wpecir_scenario_delete_failed', __( 'The scenario could not be deleted completely.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_scenario_delete_failed', __( 'The scenario could not be deleted completely.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		return true;
@@ -842,7 +842,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $system_generated && ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to record change events.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to record change events.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$schema = Schema::ensure_current();
@@ -856,12 +856,12 @@ final class Repository {
 		$context_hash= sanitize_text_field( $context_hash );
 		$allowed     = array( 'plugin_update', 'woocommerce_setting', 'plugin_setting', 'manual' );
 		if ( ! in_array( $source, $allowed, true ) || '' === $object_type || '' === $object_id || strlen( $object_id ) > 191 || ! preg_match( '/^[a-f0-9]{64}$/', $context_hash ) ) {
-			return new \WP_Error( 'wpecir_invalid_event', __( 'The change event is incomplete or contains unsupported data.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_event', __( 'The change event is incomplete or contains unsupported data.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$occurred_at = '' !== $occurred_at ? sanitize_text_field( $occurred_at ) : current_time( 'mysql', true );
 		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $occurred_at ) ) {
-			return new \WP_Error( 'wpecir_invalid_event_time', __( 'The event timestamp must be a UTC MySQL datetime.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_invalid_event_time', __( 'The event timestamp must be a UTC MySQL datetime.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$object_hash = hash( 'sha256', $object_type . ':' . $object_id );
@@ -888,7 +888,7 @@ final class Repository {
 		);
 
 		if ( false === $ok ) {
-			return new \WP_Error( 'wpecir_event_create_failed', __( 'The change event could not be saved.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_event_create_failed', __( 'The change event could not be saved.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$event_id = (int) $wpdb->insert_id;
@@ -916,7 +916,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view change events.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to view change events.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$limit  = max( 1, min( 100, absint( $limit ) ) );
@@ -942,7 +942,7 @@ final class Repository {
 		global $wpdb;
 
 		if ( ! $system_generated && ! $this->can_manage() ) {
-			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to clean up run history.', 'checkout-impact-regression-for-woocommerce' ) );
+			return new \WP_Error( 'wpecir_forbidden', __( 'You are not allowed to clean up run history.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
 
 		$limit = min( 500, max( 1, absint( $limit ) ) );
