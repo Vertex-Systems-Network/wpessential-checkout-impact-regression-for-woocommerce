@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:          Checkout Impact Regression for WooCommerce
- * Plugin URI:           https://wpessential.org/plugins/checkout-impact-regression-for-woocommerce
+ * Plugin Name:          WPEssential Checkout Impact Regression for WooCommerce
+ * Plugin URI:           https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki
  * Description:          Save checkout scenarios, approve a known-good baseline and compare shipping, coupon and payment behavior before and after a plugin update or settings change.
  * Version:              1.0.0
  * Requires at least:    6.9
@@ -11,7 +11,7 @@
  * Author URI:           https://wpessential.org
  * License:              GPL-2.0-or-later
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:          checkout-impact-regression-for-woocommerce
+ * Text Domain:          wpessential-checkout-impact-regression-for-woocommerce
  * WC requires at least: 10.8
  * WC tested up to:      11.2
  *
@@ -26,9 +26,9 @@ define( 'WPECIR_VERSION', '1.0.0' );
 define( 'WPECIR_FILE', __FILE__ );
 define( 'WPECIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WPECIR_URL', plugin_dir_url( __FILE__ ) );
-define( 'WPECIR_SLUG', 'checkout-impact-regression-for-woocommerce' );
-define( 'WPECIR_SITE_URL', 'https://wpessential.org/plugins/checkout-impact-regression-for-woocommerce' );
-define( 'WPECIR_WIKI_URL', 'https://github.com/Vertex-Systems-Network/checkout-impact-regression-for-woocommerce/wiki' );
+define( 'WPECIR_SLUG', 'wpessential-checkout-impact-regression-for-woocommerce' );
+define( 'WPECIR_SITE_URL', 'https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki' );
+define( 'WPECIR_WIKI_URL', 'https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki' );
 
 /**
  * Load the Composer-generated PSR-4 autoloader.
@@ -45,7 +45,7 @@ if ( ! is_readable( $wpecir_autoload_file ) ) {
 				return;
 			}
 
-			$message = __( 'Checkout Impact Regression for WooCommerce could not load its files. Reinstall the complete plugin package.', 'checkout-impact-regression-for-woocommerce' );
+			$message = __( 'WPEssential Checkout Impact Regression for WooCommerce could not load its files. Reinstall the complete plugin package.', 'wpessential-checkout-impact-regression-for-woocommerce' );
 			printf( '<div class="notice notice-error"><p>%s</p></div>', esc_html( $message ) );
 		}
 	);

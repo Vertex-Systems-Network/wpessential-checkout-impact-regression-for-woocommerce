@@ -1,4 +1,4 @@
-# Checkout Impact Regression for WooCommerce
+# WPEssential Checkout Impact Regression for WooCommerce
 
 See what changed at checkout after a plugin update or a settings change. Save checkout **scenarios**, approve a known-good **baseline**, and **compare** shipping method, shipping cost, coupon, discount and payment methods field by field.
 

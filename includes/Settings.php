@@ -71,7 +71,7 @@ final class Settings {
 				'wpecir_invalid_retention',
 				sprintf(
 					/* translators: 1: minimum days, 2: maximum days. */
-					__( 'Report retention must be between %1$d and %2$d days.', 'checkout-impact-regression-for-woocommerce' ),
+					__( 'Report retention must be between %1$d and %2$d days.', 'wpessential-checkout-impact-regression-for-woocommerce' ),
 					self::MIN_DAYS,
 					self::MAX_DAYS
 				),
@@ -79,7 +79,7 @@ final class Settings {
 			);
 		}
 		if ( ! is_bool( $erase ) ) {
-			return new \WP_Error( 'wpecir_invalid_erase_setting', __( 'The uninstall preference must be true or false.', 'checkout-impact-regression-for-woocommerce' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'wpecir_invalid_erase_setting', __( 'The uninstall preference must be true or false.', 'wpessential-checkout-impact-regression-for-woocommerce' ), array( 'status' => 400 ) );
 		}
 
 		update_option( self::RETENTION_OPTION, $days, false );

@@ -60,7 +60,7 @@ final class AdminPage {
 	 */
 	public function register_menu() {
 		$capability = $this->get_required_capability();
-		$title      = __( 'Checkout Impact', 'checkout-impact-regression-for-woocommerce' );
+		$title      = __( 'Checkout Impact', 'wpessential-checkout-impact-regression-for-woocommerce' );
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			add_submenu_page( 'woocommerce', $title, $title, $capability, self::PAGE_SLUG, array( $this, 'render_page' ) );
@@ -82,8 +82,8 @@ final class AdminPage {
 		}
 
 		$own = array(
-			'<a href="' . esc_url( self::url() ) . '">' . esc_html__( 'Open', 'checkout-impact-regression-for-woocommerce' ) . '</a>',
-			'<a href="' . esc_url( self::url( 'settings' ) ) . '">' . esc_html__( 'Settings', 'checkout-impact-regression-for-woocommerce' ) . '</a>',
+			'<a href="' . esc_url( self::url() ) . '">' . esc_html__( 'Open', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</a>',
+			'<a href="' . esc_url( self::url( 'settings' ) ) . '">' . esc_html__( 'Settings', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</a>',
 		);
 
 		return array_merge( $own, $links );
@@ -102,8 +102,8 @@ final class AdminPage {
 			return $meta;
 		}
 
-		$meta[] = '<a href="' . esc_url( self::url( 'docs' ) ) . '">' . esc_html__( 'Documentation', 'checkout-impact-regression-for-woocommerce' ) . '</a>';
-		$meta[] = '<a href="' . esc_url( WPECIR_WIKI_URL ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Wiki', 'checkout-impact-regression-for-woocommerce' ) . '</a>';
+		$meta[] = '<a href="' . esc_url( self::url( 'docs' ) ) . '">' . esc_html__( 'Documentation', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</a>';
+		$meta[] = '<a href="' . esc_url( WPECIR_WIKI_URL ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Wiki', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</a>';
 
 		return $meta;
 	}
@@ -137,7 +137,7 @@ final class AdminPage {
 			is_readable( $js_path ) ? (string) filemtime( $js_path ) : WPECIR_VERSION,
 			true
 		);
-		wp_set_script_translations( 'wpecir-admin', 'checkout-impact-regression-for-woocommerce' );
+		wp_set_script_translations( 'wpecir-admin', 'wpessential-checkout-impact-regression-for-woocommerce' );
 
 		wp_localize_script(
 			'wpecir-admin',
@@ -211,12 +211,12 @@ final class AdminPage {
 
 		if ( class_exists( 'WC_Shipping_Zones' ) ) {
 			$zones   = \WC_Shipping_Zones::get_zones();
-			$zones[] = array( 'zone_name' => __( 'Rest of the world', 'checkout-impact-regression-for-woocommerce' ), 'shipping_methods' => ( new \WC_Shipping_Zone( 0 ) )->get_shipping_methods() );
+			$zones[] = array( 'zone_name' => __( 'Rest of the world', 'wpessential-checkout-impact-regression-for-woocommerce' ), 'shipping_methods' => ( new \WC_Shipping_Zone( 0 ) )->get_shipping_methods() );
 			foreach ( $zones as $zone ) {
 				foreach ( (array) $zone['shipping_methods'] as $method ) {
 					$data['shippingMethods'][] = array(
 						'value' => $method->id . ':' . $method->get_instance_id(),
-						'label' => wp_strip_all_tags( $zone['zone_name'] . ' — ' . $method->get_title() ) . ( 'yes' === $method->enabled ? '' : ' (' . __( 'disabled', 'checkout-impact-regression-for-woocommerce' ) . ')' ),
+						'label' => wp_strip_all_tags( $zone['zone_name'] . ' — ' . $method->get_title() ) . ( 'yes' === $method->enabled ? '' : ' (' . __( 'disabled', 'wpessential-checkout-impact-regression-for-woocommerce' ) . ')' ),
 					);
 				}
 			}
@@ -226,7 +226,7 @@ final class AdminPage {
 		foreach ( $gateways as $gateway ) {
 			$data['paymentMethods'][] = array(
 				'value' => (string) $gateway->id,
-				'label' => wp_strip_all_tags( $gateway->get_title() ? $gateway->get_title() : $gateway->id ) . ( 'yes' === $gateway->enabled ? '' : ' (' . __( 'disabled', 'checkout-impact-regression-for-woocommerce' ) . ')' ),
+				'label' => wp_strip_all_tags( $gateway->get_title() ? $gateway->get_title() : $gateway->id ) . ( 'yes' === $gateway->enabled ? '' : ' (' . __( 'disabled', 'wpessential-checkout-impact-regression-for-woocommerce' ) . ')' ),
 			);
 		}
 
@@ -250,12 +250,12 @@ final class AdminPage {
 	public function render_page() {
 		if ( ! current_user_can( $this->get_required_capability() ) ) {
 			wp_die(
-				esc_html__( 'You do not have permission to view this page.', 'checkout-impact-regression-for-woocommerce' ),
-				esc_html__( 'Access denied', 'checkout-impact-regression-for-woocommerce' ),
+				esc_html__( 'You do not have permission to view this page.', 'wpessential-checkout-impact-regression-for-woocommerce' ),
+				esc_html__( 'Access denied', 'wpessential-checkout-impact-regression-for-woocommerce' ),
 				array( 'response' => 403 )
 			);
 		}
 
-		echo '<div class="wrap wpecir-admin-wrap"><div id="wpecir-admin-root" aria-live="polite"><p role="status">' . esc_html__( 'Loading Checkout Impact…', 'checkout-impact-regression-for-woocommerce' ) . '</p><noscript>' . esc_html__( 'Checkout Impact needs JavaScript enabled in your browser.', 'checkout-impact-regression-for-woocommerce' ) . '</noscript></div></div>';
+		echo '<div class="wrap wpecir-admin-wrap"><div id="wpecir-admin-root" aria-live="polite"><p role="status">' . esc_html__( 'Loading Checkout Impact…', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</p><noscript>' . esc_html__( 'Checkout Impact needs JavaScript enabled in your browser.', 'wpessential-checkout-impact-regression-for-woocommerce' ) . '</noscript></div></div>';
 	}
 }

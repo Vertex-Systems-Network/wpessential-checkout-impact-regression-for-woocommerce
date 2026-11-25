@@ -30,7 +30,7 @@ permissions:
   contents: read
 
 env:
-  PRO_REPO: Vertex-Systems-Network/checkout-impact-regression-pro-for-woocommerce
+  PRO_REPO: Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce
 
 jobs:
   test:
@@ -138,14 +138,14 @@ jobs:
         with:
           name: free-plugin-package
           path: |
-            dist/checkout-impact-regression-for-woocommerce-*.zip
-            dist/checkout-impact-regression-for-woocommerce-*.zip.sha256
+            dist/wpessential-checkout-impact-regression-for-woocommerce-*.zip
+            dist/wpessential-checkout-impact-regression-for-woocommerce-*.zip.sha256
           if-no-files-found: error
       - name: Keep the unpacked free build for Plugin Check and integration
         uses: actions/upload-artifact@v4
         with:
           name: free-build
-          path: build/checkout-impact-regression-for-woocommerce
+          path: build/wpessential-checkout-impact-regression-for-woocommerce
           retention-days: 3
 
   plugin-check:
@@ -156,11 +156,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: free-build
-          path: checkout-impact-regression-for-woocommerce
+          path: wpessential-checkout-impact-regression-for-woocommerce
       - uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: ./checkout-impact-regression-for-woocommerce
-          slug: checkout-impact-regression-for-woocommerce
+          build-dir: ./wpessential-checkout-impact-regression-for-woocommerce
+          slug: wpessential-checkout-impact-regression-for-woocommerce
 
   integration:
     name: Free + Pro together in WordPress Playground (PHP ${{ matrix.php }})
@@ -194,4 +194,4 @@ jobs:
       - name: Build Pro locally and run the integration check (latest WordPress + WooCommerce)
         run: |
           (cd pro-repo && ./bin/build.sh --pro-only >/dev/null)
-          pro-repo/tests/integration/run.sh free-build pro-repo/build/checkout-impact-regression-pro-for-woocommerce ${{ matrix.php }}
+          pro-repo/tests/integration/run.sh free-build pro-repo/build/wpessential-checkout-impact-regression-pro-for-woocommerce ${{ matrix.php }}

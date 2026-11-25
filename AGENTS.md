@@ -1,6 +1,6 @@
 # AI contributor instructions
 
-Canonical rules for any AI assistant (Claude, ChatGPT/Codex, Cursor, Gemini) working on **Checkout Impact Regression for WooCommerce** (WPEssential) and its Pro add-on. Tool-specific files (`CLAUDE.md`, `GEMINI.md`, `CHATGPT.md`, `.cursor/rules/`) only point here.
+Canonical rules for any AI assistant (Claude, ChatGPT/Codex, Cursor, Gemini) working on **WPEssential Checkout Impact Regression for WooCommerce** (WPEssential) and its Pro add-on. Tool-specific files (`CLAUDE.md`, `GEMINI.md`, `CHATGPT.md`, `.cursor/rules/`) only point here.
 
 ## Read first
 
@@ -15,10 +15,10 @@ If a decision is missing or two documents disagree, record the gap in the plan a
 - Core value: before/after comparison of saved checkout scenarios after a plugin update or settings change. Not uptime monitoring.
 - v1.0 is **manual** comparison (D-019). The plugin must never place orders, submit checkout, charge payments or email customers. Automatic observation is v1.x and stays blocked until Phase 6 is reopened with isolated evidence.
 - No **product** CLI (no WP-CLI commands or CLI setup) before the final-release decision. Developer tooling is fine: Composer, `bin/build.sh`, local WordPress test sites, CI, WP-CLI/Plugin Check for testing (D-017).
-- Admin UI uses WordPress-bundled React (`wp.element`), no build step. Every UI string must be a literal `__( '…', 'checkout-impact-regression-for-woocommerce' )` call (Pro: `checkout-impact-regression-pro-for-woocommerce`).
+- Admin UI uses WordPress-bundled React (`wp.element`), no build step. Every UI string must be a literal `__( '…', 'wpessential-checkout-impact-regression-for-woocommerce' )` call (Pro: `wpessential-checkout-impact-regression-pro-for-woocommerce`).
 - Pro is paid: never upload a Pro ZIP, Pro build or Pro source as an artifact, release asset or file in this public repository. Pro packages are built only in the private Pro repository (D-025).
-- Free plugin (WordPress.org) must stay fully useful: no locked features, trials or upsell nags. Paid features live only in the separate Pro repository <https://github.com/Vertex-Systems-Network/checkout-impact-regression-pro-for-woocommerce>, connected through public hooks (D-021, D-023). The free plugin never contains Pro code.
-- Plugin names follow the repository slugs: `checkout-impact-regression-for-woocommerce` (free) and `checkout-impact-regression-pro-for-woocommerce` (Pro) (D-022).
+- Free plugin (WordPress.org) must stay fully useful: no locked features, trials or upsell nags. Paid features live only in the separate Pro repository <https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce>, connected through public hooks (D-021, D-023). The free plugin never contains Pro code.
+- Plugin names follow the repository slugs: `wpessential-checkout-impact-regression-for-woocommerce` (free) and `wpessential-checkout-impact-regression-pro-for-woocommerce` (Pro) (D-022).
 - Changing a public extension point (hooks, `Repository` methods Pro calls, JS filters, CSS classes Pro uses, the `change_events` columns) needs a matching Pro change. CI runs Pro's `tests/free-api-contract.php` and a free + Pro Playground integration run on every PR; use the same branch name in both repositories for paired changes.
 - Edit `wordpress-org/readme.md`, never `readme.txt`; run `php tools/readme-to-txt.php` (WPEssential readme system). User docs live in `docs/wiki/` and the in-plugin Docs tab.
 - Compatibility claims only for combinations with recorded evidence.
@@ -44,5 +44,5 @@ for t in tests/php/*-contract.php tests/php/normalizer-diff.php tests/php/multil
 php tests/php/uninstall-contract.php erase
 php tools/readme-to-txt.php --check    # readme.txt is generated
 ./bin/build.sh                         # dist/ free ZIP
-PRO_DIR=../checkout-impact-regression-pro-for-woocommerce ./bin/build.sh   # free + Pro ZIPs
+PRO_DIR=../wpessential-checkout-impact-regression-pro-for-woocommerce ./bin/build.sh   # free + Pro ZIPs
 ```
