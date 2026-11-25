@@ -28,7 +28,7 @@
 3. Log in as `wpessential` at <https://wordpress.org/plugins/developers/add/>, accept the guidelines and upload the ZIP. Confirm the slug shown is `wpessential-checkout-impact-regression-for-woocommerce`.
 4. Answer the review email from the Plugins Team within 7 days. Reply from the same account; re-upload a fixed ZIP from the same page if asked.
 5. After approval, add repository secrets `SVN_USERNAME` (= `wpessential`) and `SVN_PASSWORD` (an SVN application password from your WordPress.org profile).
-6. Publish GitHub release `v1.0.0`. The **Deploy free plugin to WordPress.org** workflow copies the code to SVN `trunk`, tags `1.0.0` and uploads `wordpress-org/` to `assets/`.
+6. After approval and credentials are configured, publish the approved GitHub version tag/release and manually run **Build free ZIP / optional WordPress.org deploy** on that tag with publishing checked. Alternatively opt in to automatic future release publishing by setting repository variable `WPORG_DEPLOY_ENABLED=true` before publishing a release. Default runs only build an artifact; the opt-in SVN job copies code to trunk/tags and stages directory assets.
 7. Verify the [plugin wiki](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki) is publicly readable before submission.
 
 ## Review notes to keep ready
@@ -61,3 +61,7 @@ The initial upload is the inner installable ZIP, not the Actions artifact wrappe
 | 7.1.5 | 11.3.1 | 8.4.27 | Pass |
 
 PHP lint/contracts and both package builds also passed. Run 45704087895 previously detected an incorrect PHP fallback in the moving-latest tests; corrected blueprint pinning and retained runtime assertions. Update WC tested up to to 11.3; minimums and version remain unchanged. Evidence covers synthetic paired integration in Playground (SQLite), not full checkout E2E, every possible version combination or vendor QIT. Fresh CI on the header-updated packages is required. Pro artifact publication remains blocked while the repository is public.
+
+## Package-only workflow fix (2026-11-26)
+
+[Run 45718601754](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45718601754) built the ZIP and staged assets successfully, then failed because `SVN_USERNAME` was absent. This was an SVN publishing failure, not a package build failure. The workflow now separates an unconditional Free ZIP + SHA-256 artifact job from the explicit opt-in SVN job. Manual runs default to package-only; releases default to package-only unless `WPORG_DEPLOY_ENABLED=true` is set. Explicit publishing requires a matching version tag and both SVN secrets, checks the inner ZIP checksum, and deploys the extracted built package. Pull requests never publish. Actual SVN publication remains pending approval and owner credentials. No external publication or settings change was performed. Fresh PR CI is required.

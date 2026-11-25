@@ -217,3 +217,7 @@ Made by [WPEssential](https://wpessential.org).
 Version 1.0.0 uses the current repository slug, main filename, text domain and ZIP root. Plugin URI is the [documentation wiki](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki). Existing runtime and CI evidence predates this identity update; require fresh CI, Plugin Check and paired integration before submission. Do not activate both old and new plugin basenames together.
 
 Paired runtime compatibility through WooCommerce 11.3.1 was verified in [CI run 45705094936](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce/actions/runs/45705094936); see submission documentation for exact combinations and scope.
+
+### Manual package build (no SVN credentials needed)
+
+Open [Build free ZIP / optional WordPress.org deploy](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/workflows/wporg-deploy.yml), select Run workflow on main, leave publish unchecked, and download the `free-plugin-package` artifact. Extract the inner installable ZIP. The SVN job is skipped by default. Only opt in after WordPress.org approval; see the submission checklist.
