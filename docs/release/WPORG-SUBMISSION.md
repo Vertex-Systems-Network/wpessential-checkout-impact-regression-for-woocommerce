@@ -38,3 +38,11 @@
 - The readme mentions the separate Pro add-on once; the free plugin contains no Pro code, upsell banners or license checks.
 
 The final WordPress.org slug is subject to directory approval. Verify current package CI and Plugin Check before uploading; historical results do not cover the renamed package.
+
+## Main branch verification — 2026-11-26
+
+[CI run 45690435213](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45690435213), commit `9e92db5bab1bf37807e0c07ad0194ce2c0366fa0`: lint and contracts on PHP 8.2/8.3/8.4, paired Playground integration on 8.2/8.4, the free ZIP build and official Plugin Check passed. [Download artifact 15058067104](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45690435213/artifacts/15058067104) (outer artifact SHA-256 `53652a3de1de6d60204c152213c7d0d9a2358dce423f8ac28f3b24e5fe44e246`). Extract the installable ZIP and verify its included SHA-256 checksum. [Wiki sync run 45690435197](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45690435197) passed; public page access was not independently verified.
+
+The earlier [SVN deploy run 45687749046](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45687749046) failed on the old commit because `SVN_USERNAME` was not configured. Do not retry or publish before directory approval and final slug assignment. Once approved, configure the SVN credentials securely as repository secrets and deploy from the approved source, not the old commit. No WordPress.org approval, listing or SVN publication has been verified.
+
+The initial upload is the inner installable ZIP, not the Actions artifact wrapper. Keep the existing assets separate for approved SVN distribution. The official [plugin guidelines](https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/) and [developer FAQ](https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/) remain the submission authority.
