@@ -231,3 +231,18 @@ The CI #268 v0.2.1 build passed the full workflow (Composer validation/PSR-4 gen
 
 The user installed the verified package on the authorized TasteWP test site. End-to-end manual UI verification passed for a synthetic DE/EUR scenario: save scenario; explicitly approve four observed values as baseline revision 1; load the saved baseline into Before; preview shipping missing, EUR 7→12, coupon unchanged, discount EUR 10→5; save report #3 and verify history links it to approved baseline #3. The report showed 2 changed, 1 missing, 1 unchanged, 0 added, 0 needing review. All observations were manually entered; no checkout, order, payment, shipping or coupon execution occurred. Scenario and report were kept on the shared staging site for review. This closes the staging-verification gap for this IMPL-008 slice only; IMPL-008 remains Partial and Phase 7 progress remains 15/26 (58%).
 
+
+## Verified paired compatibility — 2026-11-26
+
+[Pro CI run 45705094936](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce/actions/runs/45705094936) passed on Pro head `55e05ab0482e3f25565e0fd3b10268c6514c76dc` (PR merge test) with Free `93832d7f4d38450b71a78d9a0b12082820d9f083`. Installed runtime versions were checked from logs:
+
+| WordPress | WooCommerce | PHP | Paired integration |
+|---|---|---|---|
+| 7.0.9 | 11.2.2 | 8.3.36 | Pass |
+| 7.0.9 | 11.3.1 | 8.3.36 | Pass |
+| 7.1.5 | 11.2.2 | 8.3.36 | Pass |
+| 7.1.5 | 11.3.1 | 8.3.36 | Pass |
+| 7.1.5 | 11.3.1 | 8.2.35 | Pass |
+| 7.1.5 | 11.3.1 | 8.4.27 | Pass |
+
+PHP lint/contracts and both package builds also passed. Run 45704087895 previously detected an incorrect PHP fallback in the moving-latest tests; corrected blueprint pinning and retained runtime assertions. Update WC tested up to to 11.3; minimums and version remain unchanged. Evidence covers synthetic paired integration in Playground (SQLite), not full checkout E2E, every possible version combination or vendor QIT. Fresh CI on the header-updated packages is required. Pro artifact publication remains blocked while the repository is public.

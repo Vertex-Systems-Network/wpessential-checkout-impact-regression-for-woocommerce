@@ -92,7 +92,7 @@ The free plugin is complete on its own: no locked features, trials or upsell not
 | | Minimum | Tested up to |
 |---|---|---|
 | WordPress | 6.9 | 7.1 |
-| WooCommerce | 10.8 | 11.2 |
+| WooCommerce | 10.8 | 11.3 |
 | PHP | 8.2 | 8.4 |
 | Database | MySQL/MariaDB or SQLite | Verified on MariaDB 10.11 and SQLite |
 
@@ -215,3 +215,5 @@ Made by [WPEssential](https://wpessential.org).
 ## Submission identity update (2026-11-26)
 
 Version 1.0.0 uses the current repository slug, main filename, text domain and ZIP root. Plugin URI is the [documentation wiki](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/wiki). Existing runtime and CI evidence predates this identity update; require fresh CI, Plugin Check and paired integration before submission. Do not activate both old and new plugin basenames together.
+
+Paired runtime compatibility through WooCommerce 11.3.1 was verified in [CI run 45705094936](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce/actions/runs/45705094936); see submission documentation for exact combinations and scope.
