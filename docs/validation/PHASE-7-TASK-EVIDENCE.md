@@ -246,3 +246,7 @@ The user installed the verified package on the authorized TasteWP test site. End
 | 7.1.5 | 11.3.1 | 8.4.27 | Pass |
 
 PHP lint/contracts and both package builds also passed. Run 45704087895 previously detected an incorrect PHP fallback in the moving-latest tests; corrected blueprint pinning and retained runtime assertions. Update WC tested up to to 11.3; minimums and version remain unchanged. Evidence covers synthetic paired integration in Playground (SQLite), not full checkout E2E, every possible version combination or vendor QIT. Fresh CI on the header-updated packages is required. Pro artifact publication remains blocked while the repository is public.
+
+## Package-only workflow fix (2026-11-26)
+
+[Run 45718601754](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45718601754) built the ZIP and staged assets successfully, then failed because `SVN_USERNAME` was absent. This was an SVN publishing failure, not a package build failure. The workflow now separates an unconditional Free ZIP + SHA-256 artifact job from the explicit opt-in SVN job. Manual runs default to package-only; releases default to package-only unless `WPORG_DEPLOY_ENABLED=true` is set. Explicit publishing requires a matching version tag and both SVN secrets, checks the inner ZIP checksum, and deploys the extracted built package. Pull requests never publish. Actual SVN publication remains pending approval and owner credentials. No external publication or settings change was performed. Fresh PR CI is required.

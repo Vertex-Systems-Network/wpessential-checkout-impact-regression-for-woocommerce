@@ -411,3 +411,7 @@ D-022 follows the current repository slugs, and both Plugin URI headers use the 
 ### Compatibility update (2026-11-26)
 
 Paired synthetic runtime checks passed across the two current WP and WC series; see Phase 7 evidence. WC tested up to is now 11.3, with no change to v1 scope or progress accounting. REL-002/003 remain partial pending owner submissions and vendor review.
+
+## Package-only workflow fix (2026-11-26)
+
+[Run 45718601754](https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-for-woocommerce/actions/runs/45718601754) built the ZIP and staged assets successfully, then failed because `SVN_USERNAME` was absent. This was an SVN publishing failure, not a package build failure. The workflow now separates an unconditional Free ZIP + SHA-256 artifact job from the explicit opt-in SVN job. Manual runs default to package-only; releases default to package-only unless `WPORG_DEPLOY_ENABLED=true` is set. Explicit publishing requires a matching version tag and both SVN secrets, checks the inner ZIP checksum, and deploys the extracted built package. Pull requests never publish. Actual SVN publication remains pending approval and owner credentials. No external publication or settings change was performed. Fresh PR CI is required.

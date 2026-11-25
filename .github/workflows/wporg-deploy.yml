@@ -1,18 +1,29 @@
-name: Deploy free plugin to WordPress.org
+name: Build free ZIP / optional WordPress.org deploy
 
-# Runs only after the plugin has been approved on WordPress.org and the
-# SVN_USERNAME / SVN_PASSWORD secrets have been added. Actions that receive
-# the SVN credentials are pinned to full commit SHAs.
+# A package can always be built without SVN access. Publishing is opt-in:
+# manual dispatch with publish_to_wordpress_org=true on an approved version tag,
+# or a published GitHub release with WPORG_DEPLOY_ENABLED=true.
+# Never deploy from a pull request.
 on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      publish_to_wordpress_org:
+        description: 'Publish to WordPress.org SVN (approved slug, version tag and SVN secrets required)'
+        type: boolean
+        required: false
+        default: false
+  pull_request:
+    paths:
+      - '.github/workflows/wporg-deploy.yml'
 
 permissions:
   contents: read
 
 jobs:
-  deploy:
+  package:
+    name: Build and upload installable Free ZIP
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -23,6 +34,59 @@ jobs:
           coverage: none
       - name: Build the same allowlisted package that CI and Plugin Check use
         run: ./bin/build.sh
+      - name: Upload Free ZIP and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-plugin-package
+          path: |
+            dist/wpessential-checkout-impact-regression-for-woocommerce-*.zip
+            dist/wpessential-checkout-impact-regression-for-woocommerce-*.zip.sha256
+          if-no-files-found: error
+      - name: Package-only summary
+        run: echo 'Installable Free ZIP and SHA-256 checksum are available in the free-plugin-package artifact. SVN publishing is a separate, opt-in job.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Publish to WordPress.org SVN (opt-in)
+    needs: package
+    if: (github.event_name == 'workflow_dispatch' && inputs.publish_to_wordpress_org == true) || (github.event_name == 'release' && vars.WPORG_DEPLOY_ENABLED == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify SVN credentials and version-tag ref
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: |
+          if [ -z "$SVN_USERNAME" ] || [ -z "$SVN_PASSWORD" ]; then
+            echo "::error::SVN_USERNAME and SVN_PASSWORD must be configured after WordPress.org approval. The package artifact is still available."
+            exit 1
+          fi
+          if [ "$GITHUB_REF_TYPE" != tag ]; then
+            echo "::error::Select an approved version tag rather than a branch to publish to WordPress.org."
+            exit 1
+          fi
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+      - uses: actions/download-artifact@v4
+        with:
+          name: free-plugin-package
+          path: dist
+      - name: Verify and extract the exact package built by the package job
+        shell: bash
+        run: |
+          set -euo pipefail
+          slug=wpessential-checkout-impact-regression-for-woocommerce
+          version=$(grep -m1 -E '^\s*\*\s*Version:' "$slug.php" | sed -E 's/.*Version:\s*//' | tr -d '[:space:]')
+          if [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "::error::Git tag must match plugin version $version"
+            exit 1
+          fi
+          (cd dist && sha256sum -c "$slug-$version.zip.sha256")
+          mkdir -p build
+          unzip -q "dist/$slug-$version.zip" -d build
       - name: Stage SVN assets (icons, banners, screenshots and blueprints only, not the readme source)
         run: |
           mkdir -p build/wporg-assets
