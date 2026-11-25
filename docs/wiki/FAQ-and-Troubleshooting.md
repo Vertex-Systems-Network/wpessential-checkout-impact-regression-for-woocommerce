@@ -12,4 +12,4 @@
 
 **Pro alerts are not arriving.** Check that your site can send email (an SMTP plugin helps). After three failed attempts the Alerts tab shows the time of the last failure.
 
-**"Checkout Impact Regression for WooCommerce could not load its files."** The ZIP was incomplete. Reinstall the full package from WordPress.org.
+**"WPEssential Checkout Impact Regression for WooCommerce could not load its files."** The ZIP was incomplete. Reinstall the full package from WordPress.org.

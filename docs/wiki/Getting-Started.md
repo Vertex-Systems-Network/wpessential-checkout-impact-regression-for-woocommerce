@@ -1,7 +1,7 @@
 # Getting Started
 
 1. Install and activate **WooCommerce**.
-2. Install **Checkout Impact Regression for WooCommerce** from *Plugins → Add New* (or upload the ZIP) and activate it.
+2. Install **WPEssential Checkout Impact Regression for WooCommerce** from *Plugins → Add New* (or upload the ZIP) and activate it.
 3. Open **WooCommerce → Checkout Impact**.
 
 ## Your first comparison

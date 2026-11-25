@@ -1,6 +1,6 @@
 # Pro Add-on
 
-**Checkout Impact Regression Pro for WooCommerce** is a separate plugin sold on the WooCommerce Marketplace. Repository: <https://github.com/Vertex-Systems-Network/checkout-impact-regression-pro-for-woocommerce>
+**WPEssential Checkout Impact Regression Pro for WooCommerce** is a separate plugin sold on the WooCommerce Marketplace. Repository: <https://github.com/Vertex-Systems-Network/wpessential-checkout-impact-regression-pro-for-woocommerce>
 
 | Feature | Where |
 |---|---|
