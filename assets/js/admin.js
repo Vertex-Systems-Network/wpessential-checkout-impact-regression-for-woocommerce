@@ -245,7 +245,7 @@
 		if ( ! keys.length ) {
 			return h( 'p', { className: 'wpecir-help' }, __( 'No fields were compared.', 'wpessential-checkout-impact-regression-for-woocommerce' ) );
 		}
-		return h( 'div', { className: 'wpecir-table-wrap' },
+		return h( 'div', { className: 'wpecir-table-wrap', tabIndex: 0, role: 'region', 'aria-label': __( 'Comparison results', 'wpessential-checkout-impact-regression-for-woocommerce' ) },
 			h( 'table', { className: 'wpecir-table' },
 				h( 'thead', null, h( 'tr', null,
 					h( 'th', { scope: 'col' }, __( 'Field', 'wpessential-checkout-impact-regression-for-woocommerce' ) ),
@@ -915,8 +915,9 @@
 
 		const onTabKey = function ( event, index ) {
 			let next = null;
-			if ( event.key === 'ArrowRight' ) { next = ( index + 1 ) % tabs.length; }
-			if ( event.key === 'ArrowLeft' ) { next = ( index - 1 + tabs.length ) % tabs.length; }
+			const rtl = window.getComputedStyle( event.currentTarget ).direction === 'rtl';
+			if ( event.key === 'ArrowRight' ) { next = ( index + ( rtl ? -1 : 1 ) + tabs.length ) % tabs.length; }
+			if ( event.key === 'ArrowLeft' ) { next = ( index + ( rtl ? 1 : -1 ) + tabs.length ) % tabs.length; }
 			if ( event.key === 'Home' ) { next = 0; }
 			if ( event.key === 'End' ) { next = tabs.length - 1; }
 			if ( next !== null ) {
