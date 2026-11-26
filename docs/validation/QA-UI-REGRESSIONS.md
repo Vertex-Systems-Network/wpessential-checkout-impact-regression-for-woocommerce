@@ -1,0 +1,3 @@
+# Shared UI regression fixes
+
+Pro browser QA run 45773934964 reproduced RTL viewport overflow (20px desktop, 10px mobile), RTL horizontal tab navigation mismatch, and axe scrollable-region-focusable on comparison tables. Use CSS logical margins and other directional properties, direction-aware tab keys and a labeled focusable table scroll region with visible focus. No PHP, database, REST or plugin scope change. This branch changes the Free candidate source; the submitted WordPress.org ZIP must not be silently replaced. Review the patch and coordinate with WordPress.org review before publishing any replacement. Paired Pro branch runs real Arabic and English browser checks; evidence pending.
